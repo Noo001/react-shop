@@ -272,132 +272,136 @@ const ProductsTable: React.FC = () => {
     ];
 
     return (
-        <div className={styles.container}>
-            <div className={styles.topRow}>
-                <Title level={2} className={styles.mainTitle}>Товары</Title>
-                <div className={styles.searchWrapper}>
-                    <Input
-                        placeholder="Найти"
-                        value={searchText}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setSearchText(e.target.value)}
-                        onPressEnter={(): void => {
-                            setTableParams((prev: TableParams) => ({
-                                ...prev,
-                                pagination: { ...prev.pagination, current: 1 },
-                            }));
-                        }}
-                        className={styles.searchInput}
-                        prefix={<Icon name="search" size={24} />}
-                        suffix={searchText ? (
-                            <Icon
-                                name="delete"
-                                size={24}
-                                onClick={clearSearch}
-                                className={styles.clearIcon}
-                            />
-                        ) : null}
-                    />
+        <span>
+            <div className={styles.container}>
+                <div className={styles.topRow}>
+                    <Title level={2} className={styles.mainTitle}>Товары</Title>
+                    <div className={styles.searchWrapper}>
+                        <Input
+                            placeholder="Найти"
+                            value={searchText}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setSearchText(e.target.value)}
+                            onPressEnter={(): void => {
+                                setTableParams((prev: TableParams) => ({
+                                    ...prev,
+                                    pagination: {...prev.pagination, current: 1},
+                                }));
+                            }}
+                            className={styles.searchInput}
+                            prefix={<Icon name="search" size={24}/>}
+                            suffix={searchText ? (
+                                <Icon
+                                    name="delete"
+                                    size={24}
+                                    onClick={clearSearch}
+                                    className={styles.clearIcon}
+                                />
+                            ) : null}
+                        />
+                    </div>
                 </div>
             </div>
+            <div className={styles.container}>
 
-            {/* Строка с заголовком таблицы и кнопками */}
-            <div className={styles.tableHeader}>
-                <Text className={styles.allPositions}>Все позиции</Text>
-                <Space size="middle">
-                    <Button
-                        onClick={handleRefresh}
-                        className={styles.iconButton}
-                        icon={<Icon name="refresh" size={22} />}
-                    />
-                    <Button
-                        type="primary"
-                        onClick={(): void => setIsModalVisible(true)}
-                        className={styles.addButton}
-                        icon={<Icon name="plus-circle" size={22} />}
-                    >
-                        Добавить
-                    </Button>
-                </Space>
-            </div>
+                {/* Строка с заголовком таблицы и кнопками */}
+                <div className={styles.tableHeader}>
+                    <Text className={styles.allPositions}>Все позиции</Text>
+                    <Space size="middle">
+                        <Button
+                            onClick={handleRefresh}
+                            className={styles.iconButton}
+                            icon={<Icon name="refresh" size={22}/>}
+                        />
+                        <Button
+                            type="primary"
+                            onClick={(): void => setIsModalVisible(true)}
+                            className={styles.addButton}
+                            icon={<Icon name="plus-circle" size={22}/>}
+                        >
+                            Добавить
+                        </Button>
+                    </Space>
+                </div>
 
-            <Table
-                columns={columns}
-                dataSource={products}
-                rowKey="id"
-                loading={loading}
-                pagination={{
-                    ...tableParams.pagination,
-                    showTotal: (total: number, range: [number, number]): string =>
-                        `Показано ${range[0]}-${range[1]} из ${total}`,
-                }}
-                onChange={handleTableChange}
-                className={styles.table}
-            />
+                <Table
+                    columns={columns}
+                    dataSource={products}
+                    rowKey="id"
+                    loading={loading}
+                    pagination={{
+                        ...tableParams.pagination,
+                        showTotal: (total: number, range: [number, number]): string =>
+                            `Показано ${range[0]}-${range[1]} из ${total}`,
+                    }}
+                    onChange={handleTableChange}
+                    className={styles.table}
+                />
 
-            <Modal
-                title="Добавить товар"
-                open={isModalVisible}
-                onCancel={(): void => {
-                    setIsModalVisible(false);
-                    addForm.resetFields();
-                }}
-                footer={null}
-            >
-                <Form
-                    form={addForm}
-                    layout="vertical"
-                    onFinish={handleAddProduct}
+                <Modal
+                    title="Добавить товар"
+                    open={isModalVisible}
+                    onCancel={(): void => {
+                        setIsModalVisible(false);
+                        addForm.resetFields();
+                    }}
+                    footer={null}
                 >
-                    <Form.Item
-                        name="name"
-                        label="Наименование"
-                        rules={[{ required: true, message: 'Введите наименование' }]}
+                    <Form
+                        form={addForm}
+                        layout="vertical"
+                        onFinish={handleAddProduct}
                     >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="price"
-                        label="Цена"
-                        rules={[{ required: true, message: 'Введите цену' }]}
-                    >
-                        <Input type="number" />
-                    </Form.Item>
-                    <Form.Item
-                        name="vendor"
-                        label="Вендор"
-                        rules={[{ required: true, message: 'Введите вендора' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="sku"
-                        label="Артикул"
-                        rules={[{ required: true, message: 'Введите артикул' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="category"
-                        label="Категория"
-                        rules={[{ required: true, message: 'Введите категорию' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="image"
-                        label="URL изображения"
-                    >
-                        <Input placeholder="https://example.com/image.jpg" />
-                    </Form.Item>
-                    <Form.Item style={{ textAlign: 'right', marginBottom: 0 }}>
-                        <Space>
-                            <Button onClick={(): void => setIsModalVisible(false)}>Отмена</Button>
-                            <Button type="primary" htmlType="submit">Добавить</Button>
-                        </Space>
-                    </Form.Item>
-                </Form>
-            </Modal>
-        </div>
+                        <Form.Item
+                            name="name"
+                            label="Наименование"
+                            rules={[{required: true, message: 'Введите наименование'}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item
+                            name="price"
+                            label="Цена"
+                            rules={[{required: true, message: 'Введите цену'}]}
+                        >
+                            <Input type="number"/>
+                        </Form.Item>
+                        <Form.Item
+                            name="vendor"
+                            label="Вендор"
+                            rules={[{required: true, message: 'Введите вендора'}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item
+                            name="sku"
+                            label="Артикул"
+                            rules={[{required: true, message: 'Введите артикул'}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item
+                            name="category"
+                            label="Категория"
+                            rules={[{required: true, message: 'Введите категорию'}]}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item
+                            name="image"
+                            label="URL изображения"
+                        >
+                            <Input placeholder="https://example.com/image.jpg"/>
+                        </Form.Item>
+                        <Form.Item style={{textAlign: 'right', marginBottom: 0}}>
+                            <Space>
+                                <Button onClick={(): void => setIsModalVisible(false)}>Отмена</Button>
+                                <Button type="primary" htmlType="submit">Добавить</Button>
+                            </Space>
+                        </Form.Item>
+                    </Form>
+                </Modal>
+            </div>
+        </span>
     );
 };
 
