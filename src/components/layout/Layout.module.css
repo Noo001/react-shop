@@ -1,0 +1,34 @@
+.layout {
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    background: #001529;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.menu { flex: 1;
+    min-width: 200px;
+    background: transparent;
+    border-bottom: none;
+}
+
+.content {
+    padding: 24px;
+    background: #F9F9F9;
+}
+
+.footer {
+    text-align: center;
+    background: #001529;
+    color: #fff;
+}

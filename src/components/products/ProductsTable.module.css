@@ -1,0 +1,221 @@
+.container {
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.topRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.mainTitle {
+    margin: 0 !important;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: #000 !important;
+    align-self: flex-start;
+    width: 100px;
+    height: 0;
+}
+
+.searchWrapper {
+    width: 55%;
+    align-self: center;
+}
+
+.searchInput {
+    border-radius: 4px !important;
+    border: 1px solid #e0e0e0 !important;
+    height: 48px !important;
+    background-color: #f8f9fa !important;
+    transition: all 0.3s;
+}
+
+.searchInput:hover,
+.searchInput:focus {
+    background-color: #fff !important;
+    border-color: #1890ff !important;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1) !important;
+}
+
+.clearIcon {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.clearIcon:hover {
+    opacity: 1;
+}
+
+.tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 8px 0;
+}
+
+.allPositions {
+    font-size: 16px;
+    color: #595959;
+    font-weight: 500;
+}
+
+.iconButton {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: #595959;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconButton:hover {
+    color: #1890ff;
+    background-color: #f0f7ff;
+}
+
+.addButton {
+    border-radius: 6px;
+    height: 32px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.table {
+    margin-top: 8px;
+}
+
+/* Убираем все вертикальные линии */
+.table :global(.ant-table) {
+    border: none;
+}
+
+.table :global(.ant-table-container) {
+    border-left: none;
+}
+
+.table :global(.ant-table-cell) {
+    border-right: none !important;
+}
+
+.table :global(.ant-table-thead > tr > th) {
+    background: #fafafa;
+    font-weight: 600;
+    border-right: none !important;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.table :global(.ant-table-thead > tr > th:last-child),
+.table :global(.ant-table-cell:last-child) {
+    border-right: none !important;
+}
+
+/* Горизонтальные линии только между строками */
+.table :global(.ant-table-tbody > tr > td) {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.table :global(.ant-table-tbody > tr:last-child > td) {
+    border-bottom: none;
+}
+
+/* Стили для изображений */
+.table :global(.ant-image) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Пагинация - надпись слева, элементы справа */
+.table :global(.ant-pagination) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 16px;
+    position: relative;
+}
+
+.table :global(.ant-pagination-total-text) {
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    color: #595959;
+}
+
+.table :global(.ant-pagination-item) {
+    border-radius: 4px;
+    border: 1px solid #d9d9d9;
+}
+
+.table :global(.ant-pagination-item-active) {
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.table :global(.ant-pagination-item-active a) {
+    color: white;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .topRow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .searchWrapper {
+        width: 100%;
+    }
+
+    .tableHeader {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .tableHeader :global(.ant-space) {
+        justify-content: flex-end;
+    }
+
+    .table :global(.ant-pagination) {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .table :global(.ant-pagination-total-text) {
+        position: relative;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+}
+
+.actionIcons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+}
+
+.actionIcon {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    opacity: 0.6;
+}
+
+.actionIcon:hover {
+    opacity: 1;
+}
