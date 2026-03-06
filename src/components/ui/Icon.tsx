@@ -1,6 +1,8 @@
 import React from 'react';
 
-export type IconName = 'search' | 'refresh' | 'plus' | 'edit' | 'delete' | 'user' | 'lock' | 'logout' | 'shop' | 'login-logo';
+export type IconName =
+    'search' | 'refresh' | 'plus' | 'edit' | 'delete' | 'user' |
+    'lock' | 'logout' | 'shop' | 'login-logo' | 'plus-circle' | 'menu-delete';
 
 interface IconProps {
     name: IconName;

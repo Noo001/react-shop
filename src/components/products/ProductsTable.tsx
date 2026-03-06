@@ -255,16 +255,14 @@ const ProductsTable: React.FC = () => {
             render: (_: unknown, record: Product): React.ReactNode => (
                 <Space size="middle" className={styles.actionIcons}>
                     <Icon
-                        name="edit"
-                        size={18}
-                        color="#595959"
+                        name="plus"
+                        size={52}
                         onClick={(): void => handleEdit(record)}
                         className={styles.actionIcon}
                     />
                     <Icon
-                        name="delete"
-                        size={18}
-                        color="#ff4d4f"
+                        name="menu-delete"
+                        size={32}
                         onClick={(): void => handleDelete(record)}
                         className={styles.actionIcon}
                     />
@@ -315,7 +313,7 @@ const ProductsTable: React.FC = () => {
                         type="primary"
                         onClick={(): void => setIsModalVisible(true)}
                         className={styles.addButton}
-                        icon={<Icon name="plus" size={22} />}
+                        icon={<Icon name="plus-circle" size={22} />}
                     >
                         Добавить
                     </Button>

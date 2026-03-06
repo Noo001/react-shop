@@ -61,14 +61,14 @@
 }
 
 .allPositions {
-    font-size: 16px;
-    color: #595959;
-    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    font-weight: 700;
 }
 
 .iconButton {
-    width: 32px;
-    height: 32px;
+    width: 42px !important;
+    height: 42px;
     border-radius: 6px;
     color: #595959;
     display: flex;
@@ -83,11 +83,14 @@
 
 .addButton {
     border-radius: 6px;
-    height: 32px;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 4px;
+    background-color: #242EDB;
+    width: 147px;
+    height: 42px;
 }
 
 .table {
@@ -213,7 +216,7 @@
 .actionIcon {
     cursor: pointer;
     transition: opacity 0.3s;
-    opacity: 0.6;
+    opacity: .8;
 }
 
 .actionIcon:hover {
