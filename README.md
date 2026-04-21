@@ -1,46 +1,150 @@
-# Getting Started with Create React App
+# 🛍️ Магазин Техники — Тестовое задание
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React‑приложение для управления каталогом товаров с авторизацией, таблицей, поиском, сортировкой и демо‑добавлением товаров.
 
-## Available Scripts
+## 📌 Описание задания
 
-In the project directory, you can run:
+Разработать SPA на React + TypeScript с использованием Ant Design, которое:
+  -  Реализует форму авторизации с валидацией и сохранением сессии (localStorage) с возможностью «запомнить меня».
+  -  Получает список товаров из публичного API DummyJSON (продукты, категории).
+  -  Отображает товары в таблице с колонками: чекбокс выбора, наименование (аватарка 48×48 + название + категория), вендор, артикул, оценка (цифрой, красный цвет если <3), цена, действия (✏️ 🗑️).
+  -  Обеспечивает сортировку по всем колонкам (клик по заголовку).
+  -  Позволяет искать товары по названию (поиск через API).
+  -  Реализует пагинацию (20 товаров на страницу) с информацией «Показано X‑Y из Z» и кнопками страниц.
+  -  Даёт возможность добавлять новый товар через модальное окно (без реального API, только локальное состояние) с Toast‑уведомлением.
+  -  Предусматривает кнопку обновления данных (Refresh) и очистку поля поиска.
+  -  Использует кастомные SVG‑иконки (поиск, обновление, плюс, редактирование, удаление, пользователь, замок, выход, магазин).
 
-### `npm start`
+Все компоненты строго типизированы, без any.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Функциональные возможности
+### 🔐 Авторизация
+Поля Логин и Пароль с валидацией (обязательные). <br>
+Кнопка «Войти» отправляет запрос на https://dummyjson.com/auth/login.<br>
+Чекбокс «Запомнить данные» сохраняет токен в localStorage (сессия живёт после закрытия браузера).<br>
+Кнопка очистки поля логина (крестик) появляется при вводе.<br>
+Иконка магазина над заголовком.<br>
+Обработка ошибок (неверные учётные данные, сетевые ошибки).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    Тестовые данные:
+    Логин: emilys
+    Пароль: emilyspass
 
-### `npm test`
+### 📋 Таблица товаров
+| Колонка       | Описание                                                               |
+|---------------|------------------------------------------------------------------------|
+| Чекбокс       | Выбор строк (множественный)                                            |
+| Наименование  | Аватарка 48×48 (скругление 8px), название (жирное), категория (серая) |
+| Вендор        | Производитель (из поля `brand`)                                        |
+| Артикул       | SKU товара                                                             |
+| Оценка        | Число X.X/5; красный цвет, если <3                                     |
+| Цена          | Формат: `12 345,67 ₽`                                                  |
+| Действия      | Иконки ✏️ (редактировать – демо) и 🗑️ (удаление – удаляет из таблицы)   |
+- Сортировка по всем колонкам (клик на заголовок) – данные перезапрашиваются с параметрами sortBy и order.<br>
+- Поиск по названию (поле ввода с иконкой лупы и крестиком очистки) – запрос к /products/search.<br>
+- Пагинация фиксированная: 20 товаров на страницу, отображается «Показано 1‑20 из 120» (слева) и номера страниц (справа).<br>
+- Кнопка «Обновить» (↻) сбрасывает поиск и пагинацию.<br>
+- Кнопка «Добавить товар» (➕) открывает модальное окно с формой (наименование, цена, вендор, артикул, категория, URL изображения). После добавления товар появляется в начале таблицы, появляется уведомление.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🎨 Интерфейс
+- Таблица без вертикальных линий, только горизонтальные разделители.
+- Иконки действий (edit, delete) меняют прозрачность при наведении.
+- В хедере таблицы: слева «Товары» (крупно), справа – поле поиска.
+- Под хедером: «Все позиции» (слева) и кнопки Refresh / Добавить (справа).
+- Форма входа центрирована, карточка 400px, с логотипом.
 
-### `npm run build`
+### 🛠️ Технологии
+- React 18 (функциональные компоненты, хуки)
+- TypeScript (строгая типизация, изолированные типы)
+- React Router DOM v6 (маршрутизация: /login, /products)
+- Ant Design 5 (компоненты Table, Form, Modal, Input, Button, Checkbox, Image)
+- CSS Modules (стилизация компонентов)
+- DummyJSON API (авторизация и продукты)
+- Fetch API (без дополнительных библиотек)
+- Кастомные SVG‑иконки (через img из папки public/assets/icons)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📁 Структура проекта
+```text
+src/
+├── assets/
+│   └── icons/               # SVG иконки (shop, user, lock, edit, delete, plus, refresh, search, logout)
+├── components/
+│   ├── auth/
+│   │   ├── LoginForm.tsx
+│   │   └── LoginForm.module.css
+│   ├── layout/
+│   │   ├── Layout.tsx
+│   │   └── Layout.module.css
+│   ├── products/
+│   │   ├── ProductsTable.tsx
+│   │   └── ProductsTable.module.css
+│   └── ui/
+│       └── Icon.tsx         # Универсальный компонент иконок
+├── pages/
+│   ├── LoginPage.tsx
+│   └── ProductsPage.tsx
+├── services/
+│   ├── api.ts               # fetchProducts, fetchCategories
+│   └── auth.ts              # login, logout, checkAuth, getUser
+├── types/
+│   ├── index.ts             # Product, ProductsResponse, ProductsFilters
+│   └── auth.types.ts        # LoginFormValues, User, LoginResponse
+├── App.tsx
+├── App.css
+├── index.tsx
+└── react-app-env.d.ts
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## ⚙️ Установка и запуск 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Клонировать репозиторий
+```bash
 
-### `npm run eject`
+git clone https://github.com/your-username/react-shop-ts.git
+cd react-shop-ts
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2. Установить зависимости
+```bash
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install
+```
+### 3. Запустить в режиме разработки
+```bash
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+npm start
+```
+Приложение откроется на http://localhost:3000.
+### 4. Сборка для продакшна
+```bash
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+npm run build
+```
+## 🔑 Тестовый вход
+Используйте учётные данные DummyJSON:
 
-## Learn More
+| Логин     | Пароль       |
+|-----------|--------------|
+| `emilys`  | `emilyspass` |
+| `hannah`  | `hannahpass` |
+| `michael` | `michaelpass`|
+| `sophia`  | `sophiapass` |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+После успешного входа вы будете перенаправлены на страницу товаров.
+## 🧪 Функциональное тестирование
+✅ Авторизация (реальное API)<br>
+✅ Защита маршрутов – без логина нельзя попасть в /products<br>
+✅ Загрузка товаров с пагинацией (20 записей)<br>
+✅ Поиск по названию (отправляется запрос к search)<br>
+✅ Фильтрация по категории (выпадающий список – категории из API)<br>
+✅ Сортировка по всем колонкам<br>
+✅ Добавление товара (появляется в таблице, Toast)<br>
+✅ Удаление товара (модальное подтверждение, удаляется из таблицы)<br>
+✅ Редактирование – демо-уведомление<br>
+✅ Чекбоксы выбора строк<br>
+✅ Сохранение сессии при закрытии вкладки (если чекбокс «Запомнить данные» активен)<br>
+✅ Иконки из папки public/assets/icons работают во всех компонентах<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 👨‍💻 Автор
+Андрей Ефремцев<br><br>
+Компанию, для кого сделано задание, называть не буду, так как оно даже не было просмотрено
